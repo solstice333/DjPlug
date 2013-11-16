@@ -99,8 +99,12 @@ function command(value) {
     else if (cmd[0] == "/add") {
         var hmap = createHashMap(API.getUsers(), "id"); 
 
-        if (hmap.hasOwnProperty(cmd[1]))
-            API.moderateAddDJ(hmap[cmd[1]]);
+        if (hmap.hasOwnProperty(cmd[1])) {
+            if (cmd[1] == API.getUser(null).username)
+                API.djJoin();
+            else 
+                API.moderateAddDJ(hmap[cmd[1]]);
+        }
         else
             alert("Error: Cannot add user to wait list. Does the user exist?")
     }
@@ -108,8 +112,12 @@ function command(value) {
     else if (cmd[0] == "/rm") {
         var hmap = createHashMap(API.getDJs(), "id"); 
 
-        if (hmap.hasOwnProperty(cmd[1]))
-            API.moderateRemoveDJ(hmap[cmd[1]]);
+        if (hmap.hasOwnProperty(cmd[1])) {
+            if (cmd[1] == API.getUser(null).username)
+                API.djLeave(); 
+            else
+                API.moderateRemoveDJ(hmap[cmd[1]]);
+        }
         else
             alert("Error: Cannot remove user from wait list or booth." + 
                 "Is the user on the wait list or booth?")
