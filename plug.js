@@ -150,7 +150,7 @@ function pollStatusChange(oldUsersHashMap) {
 function autowootAndPollStatusChanges(obj) {
     $("#woot").click();
 
-    if (obj != null) 
+    if (obj != null && API.hasPermission(API.getUser(null).id, API.ROLE.HOST) 
         pollStatusChange(statusMap);
 }
 
