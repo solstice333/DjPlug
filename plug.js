@@ -1,18 +1,3 @@
-/*
-* Description: This script 
-* (1) automates wooting, 
-* (2) gives everyone bouncer permissions, 
-* (3) enables some extra chat commands (see below)
-* (4) joins the dj waitlist 
-*
-* List of chat commands (starting with a forward slash '/' in the chat. 
-*  Some commands inherited by default):
-*    /skip - skips the current dj and song
-*    /vol # - sets the volume to a specified value (replace # with 0 - 100)
-*    /showst - shows the status list for everyone in the room (Available, AFK, etc.)
-*    /clear - clears the chat history
-*    /cap # - limits the number of avatars to be rendered (replace # with 1 - 200)    
-*/
 
 /*
 * Description: This function creates a <username>, <value> hashmap with a given 
