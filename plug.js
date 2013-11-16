@@ -122,6 +122,8 @@ function command(value) {
 
     else
         alert(value + " is an invalid chat command.");
+
+    pollStatusChange(statusMap);    
 }
 
 /*
@@ -130,28 +132,28 @@ function command(value) {
 * most recent user list
 */
 function pollStatusChange(oldUsersHashMap) {
-    var newUsers = API.getUsers();
+    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST) {
+        var newUsers = API.getUsers();
 
-    for (var i in newUsers) {
-        if (oldUsersHashMap.hasOwnProperty(newUsers[i].username) && 
-            newUsers[i].status != oldUsersHashMap[newUsers[i].username]) {
-            API.sendChat("Automated message: " + newUsers[i].username + " changed status to " +
-                parseStatus(newUsers[i].status));
+        for (var i in newUsers) {
+            if (oldUsersHashMap.hasOwnProperty(newUsers[i].username) && 
+                newUsers[i].status != oldUsersHashMap[newUsers[i].username]) {
+                API.sendChat("Automated message: " + newUsers[i].username + 
+                    " changed status to " + parseStatus(newUsers[i].status));
+            }
         }
-    }
 
-    statusMap = createHashMap(newUsers, "status");
+        statusMap = createHashMap(newUsers, "status");
+    }
 }
 
 /*
 * Description: autowoots on the advancement of a track. Use as a callback.
 * Parameter: obj is an array of user objects and the current media object
 */
-function autowootAndPollStatusChanges(obj) {
+function autowoot(obj) {
     $("#woot").click();
-
-    if (obj != null && API.hasPermission(API.getUser(null).id, API.ROLE.HOST) 
-        pollStatusChange(statusMap);
+    pollStatusChange(statusMap);
 }
 
 /*
@@ -163,6 +165,8 @@ function setEveryoneToBouncer() {
     for (var i = 0; i < users.length; i++) {
         API.moderateSetRole(users[i].id, API.ROLE.BOUNCER);
     } 
+
+    pollStatusChange(statusMap);
 }
 
 /*
@@ -175,8 +179,8 @@ function usrJoin(user) {
         API.sendChat("Automated message: " + user.username + " joined the room! :)");
         displayStatusList();
     }
-
-    statusMap = createHashMap(API.getUsers(), "status");
+    
+    pollStatusChange(statusMap);
 }
 
 /*
@@ -188,6 +192,8 @@ function usrLeave(user) {
         API.sendChat("Automated message: " + user.username + " left the room! :(");
         displayStatusList();
     }
+
+    pollStatusChange(statusMap);
 }
 
 /*
@@ -195,18 +201,20 @@ function usrLeave(user) {
 */
 function joinWaitList() {
     $("#dj-button").click(); 
+
+    pollStatusChange(statusMap);
 }
 
 var users = API.getUsers();
 var idMap = createHashMap(users, "id");
 var statusMap = createHashMap(users, "status");
 
-autowootAndPollStatusChanges(null);
+autowoot(null);
 setEveryoneToBouncer();
 joinWaitList();
 
 API.on(API.CHAT_COMMAND, command);
-API.on(API.DJ_ADVANCE, autowootAndPollStatusChanges);
+API.on(API.DJ_ADVANCE, autowoot);
 API.on(API.USER_JOIN, usrJoin);
 API.on(API.USER_LEAVE, usrLeave);
 
