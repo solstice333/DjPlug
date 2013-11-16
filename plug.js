@@ -1,4 +1,8 @@
 
+var users = API.getUsers();
+var idMap = createHashMap(users, "id");
+var statusMap = createHashMap(users, "status");
+
 /*
 * Description: This function creates a <username>, <value> hashmap with a given 
 * list of users and a value describing the type of value associating to the key.
@@ -132,7 +136,7 @@ function command(value) {
 * most recent user list
 */
 function pollStatusChange(oldUsersHashMap) {
-    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST) {
+    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
         var newUsers = API.getUsers();
 
         for (var i in newUsers) {
@@ -196,25 +200,17 @@ function usrLeave(user) {
     pollStatusChange(statusMap);
 }
 
-/*
-* Description: automatically adds the logged in user to the wait list
-*/
-function joinWaitList() {
-    $("#dj-button").click(); 
-
+function chatArrival(data) {
     pollStatusChange(statusMap);
 }
 
-var users = API.getUsers();
-var idMap = createHashMap(users, "id");
-var statusMap = createHashMap(users, "status");
-
 autowoot(null);
 setEveryoneToBouncer();
-joinWaitList();
+API.djJoin();
 
 API.on(API.CHAT_COMMAND, command);
 API.on(API.DJ_ADVANCE, autowoot);
 API.on(API.USER_JOIN, usrJoin);
 API.on(API.USER_LEAVE, usrLeave);
+API.on(API.CHAT, chatArrival);
 
