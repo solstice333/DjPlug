@@ -85,8 +85,8 @@ function displayStatusList() {
     API.sendChat("Automated message: Status list for current people in the room: ");
 
     for (var i = 0; i < users.length; i++) {
-        status = parseStatus(users[i].status);
-        API.sendChat("Automated message: " + users[i].username + " is " + status);
+        API.sendChat("Automated message: " + users[i].username + " is " + 
+            parseStatus(users[i].status));
     }
     
     API.sendChat(" ");
@@ -106,6 +106,35 @@ function command(value) {
         API.setVolume(parseInt(cmd[1])); 
     else if (cmd[0] == "/showst")
         displayStatusList();
+
+    else if (cmd[0] == "/add") {
+        var hmap = createHashMap(API.getUsers(), "id"); 
+
+        if (hmap.hasOwnProperty(cmd[1]))
+            API.moderateAddDJ(hmap[cmd[1]]);
+        else
+            alert("Error: Cannot add user to wait list. Does the user exist?")
+    }
+
+    else if (cmd[0] == "/rm") {
+        var hmap = createHashMap(API.getDJs(), "id"); 
+
+        if (hmap.hasOwnProperty(cmd[1]))
+            API.moderateRemoveDJ(hmap[cmd[1]]);
+        else
+            alert("Error: Cannot remove user from wait list or booth." + 
+                "Is the user on the wait list or booth?")
+    }
+
+    else if (cmd[0] == "/ban") {
+        var hmap = createHashMap(API.getUsers(), "id");
+
+        if (hmap.hasOwnProperty(cmd[1]))
+            API.moderateBanUser(hmap[cmd[1]], 1);
+        else
+            alert("Error: Cannot add user to wait list. Does the user exist?")
+    }
+
     else
         alert(value + " is an invalid chat command.");
 }
@@ -122,19 +151,22 @@ function pollStatusChange(oldUsersHashMap) {
         if (oldUsersHashMap.hasOwnProperty(newUsers[i].username) && 
             newUsers[i].status != oldUsersHashMap[newUsers[i].username]) {
             API.sendChat("Automated message: " + newUsers[i].username + " changed status to " +
-                newUsers[i].status);
+                parseStatus(newUsers[i].status));
         }
     }
+
+    statusMap = createHashMap(newUsers, "status");
 }
 
 /*
 * Description: autowoots on the advancement of a track. Use as a callback.
 * Parameter: obj is an array of user objects and the current media object
 */
-function autowoot(obj) {
+function autowootAndPollStatusChanges(obj) {
     $("#woot").click();
 
-    pollStatusChange(statusMap);
+    if (obj != null) 
+        pollStatusChange(statusMap);
 }
 
 /*
@@ -158,6 +190,8 @@ function usrJoin(user) {
         API.sendChat("Automated message: " + user.username + " joined the room! :)");
         displayStatusList();
     }
+
+    statusMap = createHashMap(API.getUsers(), "status");
 }
 
 /*
@@ -182,12 +216,12 @@ var users = API.getUsers();
 var idMap = createHashMap(users, "id");
 var statusMap = createHashMap(users, "status");
 
-autowoot(null);
+autowootAndPollStatusChanges(null);
 setEveryoneToBouncer();
 joinWaitList();
 
 API.on(API.CHAT_COMMAND, command);
-API.on(API.DJ_ADVANCE, autowoot);
+API.on(API.DJ_ADVANCE, autowootAndPollStatusChanges);
 API.on(API.USER_JOIN, usrJoin);
 API.on(API.USER_LEAVE, usrLeave);
 
