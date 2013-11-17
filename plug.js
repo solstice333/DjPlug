@@ -106,7 +106,7 @@ function command(value) {
                 API.moderateAddDJ(hmap[cmd[1]]);
         }
         else
-            alert("Error: Cannot add user to wait list. Does the user exist?")
+            alert("Error: Cannot add user to wait list. Does the user exist?");
     }
 
     else if (cmd[0] == "/rm") {
@@ -120,7 +120,7 @@ function command(value) {
         }
         else
             alert("Error: Cannot remove user from wait list or booth." + 
-                "Is the user on the wait list or booth?")
+                "Is the user on the wait list or booth?");
     }
 
     else if (cmd[0] == "/ban") {
@@ -129,7 +129,16 @@ function command(value) {
         if (hmap.hasOwnProperty(cmd[1]))
             API.moderateBanUser(hmap[cmd[1]], 1);
         else
-            alert("Error: Cannot add user to wait list. Does the user exist?")
+            alert("Error: Cannot add user to wait list. Does the user exist?");
+    }
+
+    else if (cmd[0] == "/rmst") {
+        var hmap = createHashMap(API.getUsers(), "id");
+
+        if (hmap.hasOwnProperty(cmd[1]))
+            API.moderateSetRole(hmap[cmd[1]], API.ROLE.NONE);
+        else
+            alert("Error: Cannot remove user from staff. Does the user exist?");
     }
 
     else

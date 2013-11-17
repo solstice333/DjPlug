@@ -18,6 +18,8 @@ Small Javascript extension used for plug.dj to automate some features such as wo
 
 /ban <username> - bans the user from the room permanently (or until his name is removed from the ban list through the GUI)
 
+/rmst <username> - removes user with username from staff
+
 /clear - clears the chat history
 
 /cap # - limits the number of avatars to be rendered (replace # with 1 - 200) 
