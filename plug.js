@@ -138,7 +138,7 @@ function command(value) {
         if (hmap.hasOwnProperty(cmd[1]))
             API.moderateSetRole(hmap[cmd[1]], API.ROLE.NONE);
         else
-            alert("Error: Cannot remove user from staff. Does the user exist?");
+            alert("Error: Cannot remove user from staff. User has to be in the room.");
     }
 
     else
