@@ -4,7 +4,6 @@
 *    some features 
 *
 *    TODO: make compatible with greasemonkey
-*    TODO: add in status messages for all users in the room
 */
 
 var users = API.getUsers();
