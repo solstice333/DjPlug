@@ -12,6 +12,8 @@ Small Javascript extension used for plug.dj to automate some features such as wo
 
 /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 
+/stmsg <status message string without quotes> - sets a status message, associated to the logged-in user, to display when the status list is shown (when someone enters or leaves the room, or if /showst is called manually as a chat command)
+
 /add <username> - adds user with username to the waitlist
 
 /rm <username> - removes user with username from the booth or the waitlist
