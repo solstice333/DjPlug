@@ -12,7 +12,7 @@ Small Javascript extension used for plug.dj to automate some features such as wo
 
 /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 
-/setstmsg <status message string without quotes> - sets a status message, associated to the logged-in user, to display when the status list is shown (when someone enters or leaves the room only. If user isn't the host, calling /showst will show a simplified version of the status list with only the status of the users as opposed to the mapped status messages)
+/setstmsg <status message string without quotes> - sets a status message, associated to the logged-in user, to display when the status list is shown (when someone enters or leaves the room only). If user isn't the host, calling /showst will show a simplified version of the status list with only the status of the users as opposed to the mapped status messages
 
 /getstmsg - gets the current status message of the logged-in user
 
