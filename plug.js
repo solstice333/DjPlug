@@ -1,7 +1,16 @@
+/*
+*    Author: Kevin Navero
+*    Description: Small Javascript extension used for plug.dj to automate 
+*    some features 
+*
+*    TODO: make compatible with greasemonkey
+*    TODO: add in status messages for all users in the room
+*/
 
 var users = API.getUsers();
 var idMap = createHashMap(users, "id");
 var statusMap = createHashMap(users, "status");
+var stMsgMap = createHashMap(users, "stMsg");
 
 /*
 * Description: This function creates a <username>, <value> hashmap with a given 
@@ -23,6 +32,12 @@ function createHashMap(users, value) {
         for (var i in users) {
             usersHashMap[users[i].username] = users[i].status;
         } 
+    }
+
+    else if (value == "stMsg") {
+        for (var i in users) {
+            usersHashMap[users[i].username] = "";
+        }
     }
 
     else {
@@ -75,7 +90,7 @@ function displayStatusList() {
 
     for (var i = 0; i < users.length; i++) {
         API.sendChat("Automated message: " + users[i].username + " is " + 
-            parseStatus(users[i].status));
+            parseStatus(users[i].status) + ": " + stMsgMap[users[i].username]);
     }
     
     API.sendChat(" ");
@@ -107,6 +122,16 @@ function command(value) {
         }
         else
             alert("Error: Cannot add user to wait list. Does the user exist?");
+    }
+
+    else if (cmd[0] == "/stmsg") {
+        var str = "";
+
+        for (var i = 1; i < cmd.length; i++) {
+            str += cmd[i] + " ";
+        }
+
+        API.sendChat(API.getUser(null).username + " set status message: " + str);
     }
 
     else if (cmd[0] == "/rm") {
@@ -218,6 +243,31 @@ function usrLeave(user) {
 }
 
 function chatArrival(data) {
+    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
+        var setStatusStr = true;
+        var expectedStr = data.from + " set status message: ";    
+
+        expectedStr = expectedStr.split(" ");
+        inputStr = data.message.split(" ");
+
+        for (var i = 0; i < expectedStr.length - 1; i++) {
+            if (inputStr[i] != expectedStr[i]) {
+                setStatusStr = false;
+                break;
+            }
+        }
+
+        if (setStatusStr) {
+            var outputStr = "";
+
+            for (var i = 4; i < inputStr.length; i++) {
+                outputStr += inputStr[i] + " ";
+            }
+
+            stMsgMap[data.from] = outputStr;
+        }
+    }
+
     pollStatusChange(statusMap);
 }
 
