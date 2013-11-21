@@ -15,7 +15,9 @@ var stMsgMap = createHashMap(users, "stMsg");
 * Description: This function creates a <username>, <value> hashmap with a given 
 * list of users and a value describing the type of value associating to the key.
 * Parameter: users is the user Object list usually retrieved from API.getUsers()
-* Parameter: value is the data associated or mapped to the username keys
+* Parameter: value is string that describes the data mapped to the username keys (options: "id", "status", "stMsg").
+*    For example, createHashMap(API.getUsers(), "id") would create a hashmap from the usernames returned by API.getUsers(). 
+*    The usernames are the keys, and they will be mapped to each user's id. 
 * Return: returns either a <username>,<id> hashmap or a <username>,<status> hashmap
 */
 function createHashMap(users, value) {
@@ -219,6 +221,8 @@ function setEveryoneToBouncer() {
 * Parameter: user is the user who just entered the room
 */
 function usrJoin(user) {
+    stMsgMap[user.username] = "";
+
     if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
         API.moderateSetRole(user.id, API.ROLE.BOUNCER);
         API.sendChat("Automated message: " + user.username + " joined the room! :)");
@@ -233,6 +237,8 @@ function usrJoin(user) {
 * Parameter: user is the user who just left the room
 */
 function usrLeave(user) {
+    stMsgMap[user.username] = ""; 
+
     if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
         API.sendChat("Automated message: " + user.username + " left the room! :(");
         displayStatusList();
