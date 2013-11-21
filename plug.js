@@ -283,7 +283,7 @@ function chatArrival(data) {
         if (shouldSetStatusStr) {
             var outputStr = "";
             for (var i = expectedStr.length - 1; i < inputStr.length; i++) {
-                outputStr += inputStr[i] + " ";
+                outputStr += inputStr[i].replace("&#39;", "'") + " ";
             }
 
             stMsgMap[data.from] = outputStr;
