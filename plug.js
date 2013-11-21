@@ -10,12 +10,15 @@ var users = API.getUsers();
 var idMap = createHashMap(users, "id");
 var statusMap = createHashMap(users, "status");
 var stMsgMap = createHashMap(users, "stMsg");
+var userStatusMsg = "";
+
 
 /*
 * Description: This function creates a <username>, <value> hashmap with a given 
 * list of users and a value describing the type of value associating to the key.
 * Parameter: users is the user Object list usually retrieved from API.getUsers()
 * Parameter: value is string that describes the data mapped to the username keys (options: "id", "status", "stMsg").
+*    "id" describes the user id, "status" describes the user status enum, and "stMsg" describes the user status message. 
 *    For example, createHashMap(API.getUsers(), "id") would create a hashmap from the usernames returned by API.getUsers(). 
 *    The usernames are the keys, and they will be mapped to each user's id. 
 * Return: returns either a <username>,<id> hashmap or a <username>,<status> hashmap
@@ -90,8 +93,14 @@ function displayStatusList() {
     API.sendChat("Automated message: Status list for current people in the room: ");
 
     for (var i = 0; i < users.length; i++) {
-        API.sendChat("Automated message: " + users[i].username + " is " + 
-            parseStatus(users[i].status) + ": " + stMsgMap[users[i].username]);
+        if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
+            API.sendChat("Automated message: " + users[i].username + " is " + 
+                parseStatus(users[i].status) + ": " + stMsgMap[users[i].username]);
+        }
+        else {
+            API.sendChat("Automated message: " + users[i].username + " is " + 
+                parseStatus(users[i].status));
+        }
     }
     
     API.sendChat(" ");
@@ -102,6 +111,8 @@ function displayStatusList() {
 * argument. Use as a callback.
 * Parameter: value contains the string containing the chat command to be parsed
 */
+var displayingStatusListCmd = false;
+
 function command(value) {
     cmd = value.split(" ");
 
@@ -109,7 +120,7 @@ function command(value) {
         API.moderateForceSkip();      
     else if (cmd[0] == "/vol")
         API.setVolume(parseInt(cmd[1])); 
-    else if (cmd[0] == "/showst")
+    else if (cmd[0] == "/showst") 
         displayStatusList();
 
     else if (cmd[0] == "/add") {
@@ -125,15 +136,17 @@ function command(value) {
             alert("Error: Cannot add user to wait list. Does the user exist?");
     }
 
-    else if (cmd[0] == "/stmsg") {
-        var str = "";
-
+    else if (cmd[0] == "/setstmsg") {
+        userStatusMsg = "";
         for (var i = 1; i < cmd.length; i++) {
-            str += cmd[i] + " ";
+            userStatusMsg += cmd[i] + " "; 
         }
 
-        API.sendChat(API.getUser(null).username + " set status message: " + str);
+        API.sendChat("Automated message: " + API.getUser(null).username + " set status message: " + userStatusMsg);
     }
+
+    else if (cmd[0] == "/getstmsg") 
+        API.chatLog("Automated message: your status message is: " + userStatusMsg, false);
 
     else if (cmd[0] == "/rm") {
         var hmap = createHashMap(API.getDJs(), "id"); 
@@ -247,27 +260,34 @@ function usrLeave(user) {
     pollStatusChange(statusMap);
 }
 
+var expectedStr = "";
+var inputStr = "";
+
 function chatArrival(data) {
-    var setStatusStr = true;
-    var expectedStr = data.from + " set status message: ";    
+    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
+        var shouldSetStatusStr = true;
+        inputStr = data.message.split(" ");
 
-    expectedStr = expectedStr.split(" ");
-    inputStr = data.message.split(" ");
+        // check for if user set a new status message
+        expectedStr = "Automated message: " + data.from + " set status message: ";    
+        expectedStr = expectedStr.split(" ");
 
-    for (var i = 0; i < expectedStr.length - 1; i++) {
-        if (inputStr[i] != expectedStr[i]) {
-            setStatusStr = false;
-            break;
-        }
-    }
-
-    if (setStatusStr) {
-        var outputStr = "";
-        for (var i = 4; i < inputStr.length; i++) {
-            outputStr += inputStr[i] + " ";
+        for (var i = 0; i < expectedStr.length - 1; i++) {
+            if (inputStr[i] != expectedStr[i]) {
+                shouldSetStatusStr = false;
+                break;
+            }
         }
 
-        stMsgMap[data.from] = outputStr;
+        // if user set a new status message then update the hashmap holding the status messages
+        if (shouldSetStatusStr) {
+            var outputStr = "";
+            for (var i = expectedStr.length - 1; i < inputStr.length; i++) {
+                outputStr += inputStr[i] + " ";
+            }
+
+            stMsgMap[data.from] = outputStr;
+        }
     }
 
     pollStatusChange(statusMap);
