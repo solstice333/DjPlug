@@ -242,29 +242,26 @@ function usrLeave(user) {
 }
 
 function chatArrival(data) {
-    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
-        var setStatusStr = true;
-        var expectedStr = data.from + " set status message: ";    
+    var setStatusStr = true;
+    var expectedStr = data.from + " set status message: ";    
 
-        expectedStr = expectedStr.split(" ");
-        inputStr = data.message.split(" ");
+    expectedStr = expectedStr.split(" ");
+    inputStr = data.message.split(" ");
 
-        for (var i = 0; i < expectedStr.length - 1; i++) {
-            if (inputStr[i] != expectedStr[i]) {
-                setStatusStr = false;
-                break;
-            }
+    for (var i = 0; i < expectedStr.length - 1; i++) {
+        if (inputStr[i] != expectedStr[i]) {
+            setStatusStr = false;
+            break;
+        }
+    }
+
+    if (setStatusStr) {
+        var outputStr = "";
+        for (var i = 4; i < inputStr.length; i++) {
+            outputStr += inputStr[i] + " ";
         }
 
-        if (setStatusStr) {
-            var outputStr = "";
-
-            for (var i = 4; i < inputStr.length; i++) {
-                outputStr += inputStr[i] + " ";
-            }
-
-            stMsgMap[data.from] = outputStr;
-        }
+        stMsgMap[data.from] = outputStr;
     }
 
     pollStatusChange(statusMap);
