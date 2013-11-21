@@ -4,6 +4,8 @@
 *    some features 
 *
 *    TODO: make compatible with greasemonkey
+*    TODO: make it so when non-host user inputs /showst, it posts data to the server (the host)
+*        to display the status list (which includes the status messages)       
 */
 
 var users = API.getUsers();
