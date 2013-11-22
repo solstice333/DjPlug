@@ -35,4 +35,6 @@ Small Javascript extension used for plug.dj to automate some features such as wo
 http://support.plug.dj/entries/21708648-What-are-Ambassadors-Hosts-Co-Hosts-Bouncers-Managers-
 
 ##How to use##
-Inject (Copy/Paste) the code in plug.js into your web browser's console (Ctrl + Shift + K on Firefox, Ctrl + Shift + J on Chrome) to enable special features.  
+Inject (Copy/Paste) the code in plug.js into your web browser's console (Ctrl + Shift + K on Firefox, Ctrl + Shift + J on Chrome) to enable special features. See the images here for further help on how the process looks like:
+
+https://www.dropbox.com/sh/c5ji14gsdtwvebu/cFvGQxH01A 
