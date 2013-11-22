@@ -129,8 +129,11 @@ function command(value) {
         var hmap = createHashMap(API.getUsers(), "id"); 
 
         if (hmap.hasOwnProperty(cmd[1])) {
-            if (cmd[1] == API.getUser(null).username)
+            if (cmd[1] == API.getUser(null).username) {
                 API.djJoin();
+                API.chatLog(API.getUser(null).username + 
+                    " was added to the wait list", false);
+            }
             else 
                 API.moderateAddDJ(hmap[cmd[1]]);
         }
@@ -154,8 +157,11 @@ function command(value) {
         var hmap = createHashMap(API.getDJs(), "id"); 
 
         if (hmap.hasOwnProperty(cmd[1])) {
-            if (cmd[1] == API.getUser(null).username)
+            if (cmd[1] == API.getUser(null).username) {
                 API.djLeave(); 
+                API.chatLog(API.getUser(null).username + 
+                    " was removed to the wait list", false);
+            }
             else
                 API.moderateRemoveDJ(hmap[cmd[1]]);
         }
