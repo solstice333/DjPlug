@@ -12,17 +12,17 @@ Small Javascript extension used for plug.dj to automate some features such as wo
 
 /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 
-/setstmsg <status message string without quotes> - sets a status message, associated to the logged-in user, to display when the status list is shown (when someone enters or leaves the room only). If user isn't the host, calling /showst will show a simplified version of the status list with only the status of the users as opposed to the mapped status messages
+/setstmsg [status message string without quotes] - sets a status message, associated to the logged-in user, to display when the status list is shown (when someone enters or leaves the room only). If user isn't the host, calling /showst will show a simplified version of the status list with only the status of the users as opposed to the mapped status messages
 
 /getstmsg - gets the current status message of the logged-in user
 
-/add <username> - adds user with username to the waitlist
+/add [username] - adds user with username to the waitlist
 
-/rm <username> - removes user with username from the booth or the waitlist
+/rm [username] - removes user with username from the booth or the waitlist
 
-/ban <username> - bans the user from the room permanently (or until his name is removed from the ban list through the GUI)
+/ban [username] - bans the user from the room permanently (or until his name is removed from the ban list through the GUI)
 
-/rmst <username> - removes user with username from staff
+/rmst [username] - removes user with username from staff
 
 /clear - clears the chat history
 

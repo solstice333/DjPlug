@@ -227,7 +227,7 @@ function autowoot(obj) {
 /*
 * Description: sets everyone in the room to bouncer permissions
 */
-function setEveryoneToBouncer() {
+function setEveryoneRole() {
     users = API.getUsers();
 
     for (var i = 0; i < users.length; i++) {
@@ -302,7 +302,7 @@ function chatArrival(data) {
 }
 
 autowoot(null);
-setEveryoneToBouncer();
+setEveryoneRole();
 API.djJoin();
 
 API.on(API.CHAT_COMMAND, command);
