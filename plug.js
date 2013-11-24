@@ -160,7 +160,7 @@ function command(value) {
             if (cmd[1] == API.getUser(null).username) {
                 API.djLeave(); 
                 API.chatLog(API.getUser(null).username + 
-                    " was removed to the wait list", false);
+                    " was removed from the wait list", false);
             }
             else
                 API.moderateRemoveDJ(hmap[cmd[1]]);
