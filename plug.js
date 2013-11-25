@@ -301,7 +301,7 @@ function chatArrival(data) {
     pollStatusChange(statusMap);
 }
 
-API.chatLog("Running plug.js script...");
+API.chatLog("Setting up plug.js...");
 
 autowoot(null);
 setEveryoneRole();
@@ -313,5 +313,5 @@ API.on(API.USER_JOIN, usrJoin);
 API.on(API.USER_LEAVE, usrLeave);
 API.on(API.CHAT, chatArrival);
 
-API.chatLog("plug.js script finished! Event listeners set up successfully!");
+API.chatLog("plug.js script setup finished!");
 
