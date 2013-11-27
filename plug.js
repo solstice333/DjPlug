@@ -141,6 +141,25 @@ function command(value) {
             alert("Error: Cannot add user to wait list. Does the user exist?");
     }
 
+    else if (cmd[0] == "/rm") {
+        var hmap = createHashMap(API.getWaitList(), "id");
+        hmap[API.getDJ().username] = API.getDJ().id;
+
+        if (hmap.hasOwnProperty(cmd[1])) {
+            if (cmd[1] == API.getUser(null).username) {
+                API.djLeave(); 
+                API.chatLog(API.getUser(null).username + 
+                    " was removed from the wait list", false);
+            }
+            else 
+                API.moderateRemoveDJ(hmap[cmd[1]]);
+        }
+
+        else
+            alert("Error: Cannot remove user from wait list or booth." + 
+                "Is the user on the wait list or booth?");
+    }
+
     else if (cmd[0] == "/setstmsg") {
         userStatusMsg = "";
         for (var i = 1; i < cmd.length; i++) {
@@ -152,23 +171,6 @@ function command(value) {
 
     else if (cmd[0] == "/getstmsg") 
         API.chatLog("Automated message: your status message is: " + userStatusMsg, false);
-
-    else if (cmd[0] == "/rm") {
-        var hmap = createHashMap(API.getDJs(), "id"); 
-
-        if (hmap.hasOwnProperty(cmd[1])) {
-            if (cmd[1] == API.getUser(null).username) {
-                API.djLeave(); 
-                API.chatLog(API.getUser(null).username + 
-                    " was removed from the wait list", false);
-            }
-            else
-                API.moderateRemoveDJ(hmap[cmd[1]]);
-        }
-        else
-            alert("Error: Cannot remove user from wait list or booth." + 
-                "Is the user on the wait list or booth?");
-    }
 
     else if (cmd[0] == "/ban") {
         var hmap = createHashMap(API.getUsers(), "id");
