@@ -17,13 +17,14 @@ See below for a list of chat commands and how they are used.
     /setstmsg [status message string without quotes] - sets a status message, associated to the 
     logged-in user, to display when the status list is shown (when someone enters or leaves the 
     room only). If user isn't the host, calling /showst will show a simplified version of the 
-    status list with only the status of the users as opposed to the mapped status messages
+    status list with only the status of the users as opposed to the mapped status messages. 
+    For example, "/setstmsg Hello" would set the status message to "Hello"
 
     /getstmsg - gets the current status message of the logged-in user
 
-    /setst [status as a string] - sets the status of the logged-in user with the given string. 
-    Strings input options are "Available", "AFK", "Working", or "Gaming" which are all case 
-    sensitive.
+    /setst [status as a string without quotes] - sets the status of the logged-in user with the 
+    given string. Strings input options are "Available", "AFK", "Working", or "Gaming" which
+    are all case sensitive. For example, "/setst Available" would set the status to Available.
 
     /add [username] - adds user with username to the waitlist
 
