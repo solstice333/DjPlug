@@ -47,7 +47,7 @@ function createHashMap(users, value) {
     }
 
     else {
-        alert("Error: value does not exist");
+        API.chatLog("Error: value does not exist");
         usersHashMap = null;
     }
 
@@ -55,12 +55,13 @@ function createHashMap(users, value) {
 }
 
 /*
-* Description: parseStatus parses the input status number and returns the status referenced to
-* as a string
-* Parameter: status is the integer value mapped to the status
-* Return: returns the status as the string value that the integer value maps to
+* Description: parseStatusGivenValue parses the API.STATUS data constant and returns the 
+* status referenced to as a string
+* Parameter: status is the integer value (i.e. the API.STATUS data constant) 
+* mapped to the status
+* Return: returns the status as a string that the API.STATUS data constant maps to
 */
-function parseStatus(status) {
+function parseStatusGivenValue(status) {
     var s; 
 
     switch (status) {
@@ -77,12 +78,31 @@ function parseStatus(status) {
         s = "Gaming";
         break;
     default:
-        s = 0;
-        alert("Error: Status does not exist\n");
+        s = -1;
         break;
     }
 
     return s;
+}
+
+/*
+* Description: parseStatusGivenString parses the input status string and returns the 
+* status referenced to as a number (one of the API.STATUS data constants)
+* Parameter: status is the string mapped to the API.STATUS data constant
+* Return: returns the status as the associating API.STATUS data constant 
+*/
+function parseStatusGivenString(status) {
+    if (status == "Available")
+        return 0;
+    else if (status == "AFK")
+        return 1;
+    else if (status == "Working")
+        return 2;
+    else if (status == "Gaming")
+        return 3;
+    else {
+        return -1;
+    }
 }
 
 /*
@@ -97,11 +117,11 @@ function displayStatusList() {
     for (var i = 0; i < users.length; i++) {
         if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
             API.sendChat("Automated message: " + users[i].username + " is " + 
-                parseStatus(users[i].status) + ": " + stMsgMap[users[i].username]);
+                parseStatusGivenValue(users[i].status) + ": " + stMsgMap[users[i].username]);
         }
         else {
             API.sendChat("Automated message: " + users[i].username + " is " + 
-                parseStatus(users[i].status));
+                parseStatusGivenValue(users[i].status));
         }
     }
     
@@ -138,7 +158,7 @@ function command(value) {
                 API.moderateAddDJ(hmap[cmd[1]]);
         }
         else
-            alert("Error: Cannot add user to wait list. Does the user exist?");
+            API.chatLog("Error: Cannot add user to wait list. Does the user exist?");
     }
 
     else if (cmd[0] == "/rm") {
@@ -156,7 +176,7 @@ function command(value) {
         }
 
         else
-            alert("Error: Cannot remove user from wait list or booth." + 
+            API.chatLog("Error: Cannot remove user from wait list or booth." + 
                 "Is the user on the wait list or booth?");
     }
 
@@ -178,7 +198,21 @@ function command(value) {
         if (hmap.hasOwnProperty(cmd[1]))
             API.moderateBanUser(hmap[cmd[1]], 1);
         else
-            alert("Error: Cannot add user to wait list. Does the user exist?");
+            API.chatLog("Error: Cannot add user to wait list. Does the user exist?");
+    }
+
+    else if (cmd[0] == "/setst") {
+        var s = parseStatusGivenString(cmd[1]);
+
+        if (s >= 0 && s < 4) {
+            API.setStatus(s);
+            API.chatLog("Automated message: successfully switched status to " + cmd[1], 
+                false);
+        }
+        else {
+            API.chatLog("Error: Invalid status input. Try 'Available'," + 
+                " 'AFK', 'Working', or 'Gaming'. Status input is case sensitive.", false);
+        }
     }
 
     else if (cmd[0] == "/rmst") {
@@ -187,11 +221,11 @@ function command(value) {
         if (hmap.hasOwnProperty(cmd[1]))
             API.moderateSetRole(hmap[cmd[1]], API.ROLE.NONE);
         else
-            alert("Error: Cannot remove user from staff. User has to be in the room.");
+            API.chatLog("Error: Cannot remove user from staff. User has to be in the room.");
     }
 
     else
-        alert(value + " is an invalid chat command.");
+        API.chatLog(value + " is an invalid chat command.");
 
     pollStatusChange(statusMap);    
 }
@@ -209,7 +243,7 @@ function pollStatusChange(oldUsersHashMap) {
             if (oldUsersHashMap.hasOwnProperty(newUsers[i].username) && 
                 newUsers[i].status != oldUsersHashMap[newUsers[i].username]) {
                 API.sendChat("Automated message: " + newUsers[i].username + 
-                    " changed status to " + parseStatus(newUsers[i].status));
+                    " changed status to " + parseStatusGivenValue(newUsers[i].status));
             }
         }
 

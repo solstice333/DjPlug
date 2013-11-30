@@ -3,17 +3,7 @@
 ##Description##
 Small Javascript extension used for plug.dj to automate some features such as wooting, giving everyone bouncer permissions, notifications on when a user joins or leaves the room followed by a user status list, notifications on change of user's status (everytime a song advances in play), and joining the dj waitlist when executed. 
 
-Note that temp.js (simplified version of plug.js) is being used as plug.dj fixes their bugs. The core web application seems to be slightly broken. Two commands are enabled in temp.js - /skip and /vol. Autowoot is enabled as well as notifications on user entry and user leave. 
-
 See below for a list of chat commands and how they are used.
-
-**List of chat commands for temp.js**
-
-    /skip - skips the current dj and song
-
-    /vol # - sets the volume to a specified value (replace # with 0 - 100)
-
-    /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 
 
 **List of chat commands for plug.js (starting with a forward slash '/' in the chat. Some commands inherited by default):**
@@ -30,6 +20,10 @@ See below for a list of chat commands and how they are used.
     status list with only the status of the users as opposed to the mapped status messages
 
     /getstmsg - gets the current status message of the logged-in user
+
+    /setst [status as a string] - sets the status of the logged-in user with the given string. 
+    Strings input options are "Available", "AFK", "Working", or "Gaming" which are all case 
+    sensitive.
 
     /add [username] - adds user with username to the waitlist
 
