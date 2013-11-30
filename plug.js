@@ -129,6 +129,30 @@ function displayStatusList() {
 }
 
 /*
+* Description: displays the status list mapped to all the users in the room
+*/
+function displayStatusListHidden() {
+    users = API.getUsers();
+
+    API.chatLog(" ", false);
+    API.chatLog("Automated message: Status list for current people in the room: ", false);
+
+    for (var i = 0; i < users.length; i++) {
+        if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
+            API.chatLog("Automated message: " + users[i].username + " is " + 
+                parseStatusGivenValue(users[i].status) + ": " + 
+                stMsgMap[users[i].username], false);
+        }
+        else {
+            API.chatLog("Automated message: " + users[i].username + " is " + 
+                parseStatusGivenValue(users[i].status), false);
+        }
+    }
+    
+    API.chatLog(" ", false);
+}
+
+/*
 * Description: performs a specific set of actions based on the chat command passed in as an 
 * argument. Use as a callback.
 * Parameter: value contains the string containing the chat command to be parsed
@@ -143,7 +167,7 @@ function command(value) {
     else if (cmd[0] == "/vol")
         API.setVolume(parseInt(cmd[1])); 
     else if (cmd[0] == "/showst") 
-        displayStatusList();
+        displayStatusListHidden();
 
     else if (cmd[0] == "/add") {
         var hmap = createHashMap(API.getUsers(), "id"); 
