@@ -26,6 +26,8 @@ See below for a list of chat commands and how they are used.
     given string. Strings input options are "Available", "AFK", "Working", or "Gaming" which
     are all case sensitive. For example, "/setst Available" would set the status to Available.
 
+    /getst - returns the status of the logged-in user
+
     /add [username] - adds user with username to the waitlist
 
     /rm [username] - removes user with username from the booth or the waitlist
