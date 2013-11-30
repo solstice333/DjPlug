@@ -215,6 +215,11 @@ function command(value) {
         }
     }
 
+    else if (cmd[0] == "/getst") {
+        var u = API.getUser();
+        API.chatLog("Automated message: your status is " + parseStatusGivenValue(u.status));
+    }
+
     else if (cmd[0] == "/rmst") {
         var hmap = createHashMap(API.getUsers(), "id");
 
