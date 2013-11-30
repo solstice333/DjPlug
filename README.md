@@ -9,11 +9,14 @@ See below for a list of chat commands and how they are used.
 
 **List of chat commands for temp.js**
 
-    /skip - see below
+    /skip - skips the current dj and song
 
-    /vol # - see below
+    /vol # - sets the volume to a specified value (replace # with 0 - 100)
 
-**List of chat commands (starting with a forward slash '/' in the chat. Some commands inherited by default):**
+    /showst - shows the status list for everyone in the room (Available, AFK, etc.)
+
+
+**List of chat commands for plug.js (starting with a forward slash '/' in the chat. Some commands inherited by default):**
 
     /skip - skips the current dj and song
 
