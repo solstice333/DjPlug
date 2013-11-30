@@ -8,6 +8,7 @@ Note that temp.js (simplified version of plug.js) is being used as plug.dj fixes
 See below for a list of chat commands and how they are used.
 
 **List of chat commands for temp.js**
+
     /skip - see below
 
     /vol # - see below
@@ -20,7 +21,10 @@ See below for a list of chat commands and how they are used.
 
     /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 
-    /setstmsg [status message string without quotes] - sets a status message, associated to the logged-in user, to display when the status list is shown (when someone enters or leaves the room only). If user isn't the host, calling /showst will show a simplified version of the status list with only the status of the users as opposed to the mapped status messages
+    /setstmsg [status message string without quotes] - sets a status message, associated to the 
+    logged-in user, to display when the status list is shown (when someone enters or leaves the 
+    room only). If user isn't the host, calling /showst will show a simplified version of the 
+    status list with only the status of the users as opposed to the mapped status messages
 
     /getstmsg - gets the current status message of the logged-in user
 
