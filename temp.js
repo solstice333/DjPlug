@@ -10,6 +10,8 @@ function command(value) {
         API.moderateForceSkip();      
     else if (cmd[0] == "/vol")
         API.setVolume(parseInt(cmd[1])); 
+    else if (cmd[0] == "/showst") 
+        displayStatusList();
     else
         alert(value + " is an invalid chat command.");
 }
@@ -18,12 +20,15 @@ function usrJoin(user) {
     if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
         API.moderateSetRole(user.id, API.ROLE.BOUNCER);
         API.sendChat("Automated message: " + user.username + " joined the room! :)");
+        displayStatusList();
     }
 }
 
 function usrLeave(user) {
-    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST))
+    if (API.hasPermission(API.getUser(null).id, API.ROLE.HOST)) {
         API.sendChat("Automated message: " + user.username + " left the room! :(");
+        displayStatusList();
+    }
 }
 
 function autowoot(obj) {
@@ -36,6 +41,20 @@ function setEveryoneRole() {
     for (var i = 0; i < users.length; i++) {
         API.moderateSetRole(users[i].id, API.ROLE.BOUNCER);
     } 
+}
+
+function displayStatusList() {
+    users = API.getUsers();
+
+    API.sendChat(" ");
+    API.sendChat("Automated message: Status list for current people in the room: ");
+
+    for (var i = 0; i < users.length; i++) {
+        API.sendChat("Automated message: " + users[i].username + " is " + 
+            parseStatus(users[i].status));
+    }
+    
+    API.sendChat(" ");
 }
 
 API.chatLog("Setting up temp.js...");
