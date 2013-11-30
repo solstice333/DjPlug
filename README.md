@@ -32,7 +32,8 @@ See below for a list of chat commands and how they are used.
 
     /rm [username] - removes user with username from the booth or the waitlist
 
-    /ban [username] - bans the user from the room permanently (or until his name is removed from the ban list through the GUI)
+    /ban [username] - bans the user from the room permanently (or until his name is removed 
+    from the ban list through the GUI)
 
     /rmst [username] - removes user with username from staff
 
