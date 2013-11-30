@@ -43,6 +43,31 @@ function setEveryoneRole() {
     } 
 }
 
+function parseStatus(status) {
+    var s; 
+
+    switch (status) {
+    case 0:
+        s = "Available";
+        break;
+    case 1:
+        s = "AFK";
+        break;
+    case 2:
+        s = "Working";
+        break;
+    case 3:
+        s = "Gaming";
+        break;
+    default:
+        s = 0;
+        alert("Error: Status does not exist\n");
+        break;
+    }
+
+    return s;
+}
+
 function displayStatusList() {
     users = API.getUsers();
 
