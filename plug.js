@@ -164,8 +164,10 @@ function command(value) {
 
     if (cmd[0] == "/skip") 
         API.moderateForceSkip();      
-    else if (cmd[0] == "/vol")
+
+    else if (cmd[0] == "/vol") 
         API.setVolume(parseInt(cmd[1])); 
+
     else if (cmd[0] == "/showst") 
         displayStatusListHidden();
 
@@ -199,9 +201,23 @@ function command(value) {
                 API.moderateRemoveDJ(hmap[cmd[1]]);
         }
 
-        else
+        else 
             API.chatLog("Error: Cannot remove user from wait list or booth." + 
                 "Is the user on the wait list or booth?");
+    }
+
+    else if (cmd[0] == "/getwl") {
+        var waitlist = API.getWaitList();
+
+        API.chatLog(" ", false);
+        API.chatLog("Automated message: Waitlist: ", false);
+        API.chatLog("Automated message: " + API.getDJ().username, false);
+
+        for (var i in waitlist) {
+            API.chatLog("Automated message: " + waitlist[i].username, false);
+        }
+
+        API.chatLog(" ", false);
     }
 
     else if (cmd[0] == "/setstmsg") {
@@ -233,10 +249,9 @@ function command(value) {
             API.chatLog("Automated message: successfully switched status to " + cmd[1], 
                 false);
         }
-        else {
+        else 
             API.chatLog("Error: Invalid status input. Try 'Available'," + 
                 " 'AFK', 'Working', or 'Gaming'. Status input is case sensitive.", false);
-        }
     }
 
     else if (cmd[0] == "/getst") {
@@ -244,7 +259,7 @@ function command(value) {
         API.chatLog("Automated message: your status is " + parseStatusGivenValue(u.status));
     }
 
-    else if (cmd[0] == "/rmst") {
+    else if (cmd[0] == "/rmstaff") {
         var hmap = createHashMap(API.getUsers(), "id");
 
         if (hmap.hasOwnProperty(cmd[1]))
@@ -253,10 +268,12 @@ function command(value) {
             API.chatLog("Error: Cannot remove user from staff. User has to be in the room.");
     }
 
-    else
+    else 
         API.chatLog(value + " is an invalid chat command.");
 
-    pollStatusChange(statusMap);    
+    setTimeout(function() {
+        pollStatusChange(statusMap);
+    }, 1000);
 }
 
 /*
