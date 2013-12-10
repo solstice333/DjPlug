@@ -14,6 +14,8 @@ See below for a list of chat commands and how they are used.
 
     /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 
+    /getwl - gets the waitlist including the DJ
+
     /setstmsg [status message string without quotes] - sets a status message, associated to the 
     logged-in user, to display when the status list is shown (when someone enters or leaves the 
     room only). If user isn't the host, calling /showst will show a simplified version of the 
