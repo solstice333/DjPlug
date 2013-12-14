@@ -47,7 +47,7 @@ See below for a list of chat commands and how they are used.
 
 **Description on what bouncers can do:**
 
-http://support.plug.dj/entries/21708648-What-are-Ambassadors-Hosts-Co-Hosts-Bouncers-Managers-
+http://blog.plug.dj/2012/11/plug-dj-new-server-and-moderation-tools/
 
 ##How to use##
 Inject (Copy/Paste) the code (all of it - hit ctrl + a to select all) in plug.js into your web browser's console (Ctrl + Shift + K on Firefox, Ctrl + Shift + J on Chrome) to enable special features. See the images here for further help on how the process looks like:
