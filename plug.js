@@ -2,11 +2,9 @@
 *    Author: Kevin Navero
 *    Description: Small Javascript extension used for plug.dj to automate 
 *    some features 
-*
-*    TODO: make compatible with greasemonkey
-*    TODO: make it so when non-host user inputs /showst, it posts data to the server (the host)
-*        to display the status list (which includes the status messages)       
 */
+
+window.setTimeout(function() {
 
 var users = API.getUsers();
 var idMap = createHashMap(users, "id");
@@ -397,3 +395,5 @@ API.on(API.CHAT, chatArrival);
 
 API.chatLog("plug.js script setup finished!");
 
+
+}, 3000);
