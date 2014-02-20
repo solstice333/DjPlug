@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name       RSquashScript
+// @include    http://plug.dj/rsquash/
+// @namespace  http://plug.dj/rsquash/
+// @version    1.0
+// @description  Plug.dj Automation Tool
+// @match      
+// @copyright  2014, Kevin Navero
+// ==/UserScript==
+
 /*
 *    Author: Kevin Navero
 *    Description: Small Javascript extension used for plug.dj to automate 
