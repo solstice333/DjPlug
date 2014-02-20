@@ -1,4 +1,4 @@
-#Plugged#
+#RSquashScript#
 
 ##Description##
 Small Javascript extension used for plug.dj to automate some features such as wooting, giving everyone bouncer permissions, notifications on when a user joins or leaves the room followed by a user status list, notifications on change of user's status (everytime a song advances in play), and joining the dj waitlist when executed. 
@@ -50,6 +50,11 @@ See below for a list of chat commands and how they are used.
 http://blog.plug.dj/2012/11/plug-dj-new-server-and-moderation-tools/
 
 ##How to use##
-Inject (Copy/Paste) the code (all of it - hit ctrl + a to select all) in plug.js into your web browser's console (Ctrl + Shift + K on Firefox, Ctrl + Shift + J on Chrome) to enable special features. See the images here for further help on how the process looks like:
+Use with browser extensions/add-ons Tampermonkey (if on Google Chrome) or Greasemonkey (if on Mozilla Firefox). After installing 
+either Tampermonkey or Greasemonkey, visit http://userscripts.org/scripts/show/392427 to install the userscript.
 
-https://www.dropbox.com/sh/c5ji14gsdtwvebu/cFvGQxH01A 
+Images for guidance:
+
+Step 1: https://www.dropbox.com/s/x04pbjrtyvgpw9f/step1.JPG
+
+Step 2: https://www.dropbox.com/s/esa2bopvihg0slg/step2.JPG
