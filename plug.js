@@ -396,4 +396,4 @@ API.on(API.CHAT, chatArrival);
 API.chatLog("plug.js script setup finished!");
 
 
-}, 3000);
+}, 10000);
