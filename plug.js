@@ -2,7 +2,7 @@
 // @name       RSquashScript
 // @include    http://plug.dj/rsquash/
 // @namespace  http://plug.dj/rsquash/
-// @version    1.0
+// @version    1.01
 // @description  Plug.dj Automation Tool
 // @copyright  2014, Kevin Navero
 // ==/UserScript==
