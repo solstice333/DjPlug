@@ -30,14 +30,14 @@ See below for a list of chat commands and how they are used.
 
     /getst - returns the status of the logged-in user
 
-    /add [username] - adds user with username to the waitlist
+    /add [@username] - adds user with username to the waitlist
 
-    /rm [username] - removes user with username from the booth or the waitlist
+    /rm [@username] - removes user with username from the booth or the waitlist
 
-    /ban [username] - bans the user from the room permanently (or until his name is removed 
+    /ban [@username] - bans the user from the room permanently (or until his name is removed 
     from the ban list through the GUI)
 
-    /rmst [username] - removes user with username from staff
+    /rmst [@username] - removes user with username from staff
 
     /clear - clears the chat history
 
