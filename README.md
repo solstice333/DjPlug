@@ -10,11 +10,25 @@ See below for a list of chat commands and how they are used.
 
     /skip - skips the current dj and song
 
-    /vol # - sets the volume to a specified value (replace # with 0 - 100)
+    /vol [#] - sets the volume to a specified value (replace # with 0 - 100)
+
+    /dance - toggle the settings option for dancing avatars
+
+    /roll - toggle the settings option for avatar rollovers
+
+    /bg - toggle the settings option for background animation
+
+    /av - toggle the settings option for audio/video streaming (this saves a noticeable amount of CPU if you're AFK)
+
+    /cap [#] - limits the number of avatars to be rendered (replace # with 1 - 200) 
 
     /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 
-    /getwl - gets the waitlist including the DJ
+    /setst [status as a string without quotes] - sets the status of the logged-in user with the 
+    given string. Strings input options are "Available", "AFK", "Working", or "Gaming" which
+    are all case sensitive. For example, "/setst Available" would set the status to Available.
+
+    /getst - returns the status of the logged-in user
 
     /setstmsg [status message string without quotes] - sets a status message, associated to the 
     logged-in user, to display when the status list is shown (when someone enters or leaves the 
@@ -24,11 +38,7 @@ See below for a list of chat commands and how they are used.
 
     /getstmsg - gets the current status message of the logged-in user
 
-    /setst [status as a string without quotes] - sets the status of the logged-in user with the 
-    given string. Strings input options are "Available", "AFK", "Working", or "Gaming" which
-    are all case sensitive. For example, "/setst Available" would set the status to Available.
-
-    /getst - returns the status of the logged-in user
+    /getwl - gets the waitlist including the DJ
 
     /add [@username] - adds user with username to the waitlist
 
@@ -40,9 +50,6 @@ See below for a list of chat commands and how they are used.
     /rmst [@username] - removes user with username from staff
 
     /clear - clears the chat history
-
-    /cap # - limits the number of avatars to be rendered (replace # with 1 - 200) 
-
 
 
 **Description on what bouncers can do:**

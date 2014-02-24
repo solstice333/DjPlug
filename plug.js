@@ -2,7 +2,7 @@
 // @name       RSquashScript
 // @include    http://plug.dj/rsquash/
 // @namespace  http://plug.dj/rsquash/
-// @version    1.01
+// @version    1.02
 // @description  Plug.dj Automation Tool
 // @copyright  2014, Kevin Navero
 // ==/UserScript==
@@ -25,8 +25,6 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// TODO in /add and /rm use a value = @user then value.split("@")[1]
-
 window.setTimeout(function() {
     var users = API.getUsers();
     var idMap = createHashMap(users, "id");
@@ -48,24 +46,15 @@ window.setTimeout(function() {
     function createHashMap(users, value) {
         var usersHashMap = new Object();
 
-        if (value == "id") {
-            for (var i in users) {
+        if (value == "id") 
+            for (var i in users) 
                 usersHashMap[users[i].username] = users[i].id;
-            }
-        }
-
-        else if (value == "status") {
-            for (var i in users) {
+        else if (value == "status") 
+            for (var i in users) 
                 usersHashMap[users[i].username] = users[i].status;
-            } 
-        }
-
-        else if (value == "stMsg") {
-            for (var i in users) {
+        else if (value == "stMsg") 
+            for (var i in users) 
                 usersHashMap[users[i].username] = "";
-            }
-        }
-
         else {
             API.chatLog("Error: value does not exist");
             usersHashMap = null;
@@ -290,6 +279,34 @@ window.setTimeout(function() {
                 API.moderateSetRole(hmap[cmd[1]], API.ROLE.NONE);
             else
                 API.chatLog("Error: Cannot remove user from staff. User has to be in the room.");
+        }
+
+        else if (cmd[0] == "/dance") {
+            _$context.trigger("settings:show");
+            $("#settings").hide();
+            $(".item.s-dancing").click();
+            _$context.trigger("settings:hide");
+        }
+
+        else if (cmd[0] == "/roll") {
+            _$context.trigger("settings:show");
+            $("#settings").hide();
+            $(".item.s-avatar").click();
+            _$context.trigger("settings:hide");
+        }
+
+        else if (cmd[0] == "/bg") {
+            _$context.trigger("settings:show");
+            $("#settings").hide();
+            $(".item.s-bg").click();
+            _$context.trigger("settings:hide");
+        }
+
+        else if (cmd[0] == "/av") {
+            _$context.trigger("settings:show");
+            $("#settings").hide();
+            $(".item.s-av").click();
+            _$context.trigger("settings:hide");
         }
 
         else 
