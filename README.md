@@ -18,9 +18,15 @@ See below for a list of chat commands and how they are used.
 
     /bg - toggle the settings option for background animation
 
-    /av - toggle the settings option for audio/video streaming (this saves a noticeable amount of CPU if you're AFK)
+    /av - toggle the settings option for audio/video streaming
 
-    /cap [#] - limits the number of avatars to be rendered (replace # with 1 - 200) 
+    /notif - toggle the settings options for notifications
+
+    /cap [#] - limits the number of avatars to be rendered (replace # with 1 - 200)
+
+    /tall - toggle all of the options in settings that don't require the page to refresh. Use
+    when entering browser incognito mode and want to switch to a conservative state to 
+    reduce CPU load and memory usage
 
     /showst - shows the status list for everyone in the room (Available, AFK, etc.)
 

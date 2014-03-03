@@ -2,7 +2,7 @@
 // @name       RSquashScript
 // @include    http://plug.dj/rsquash/
 // @namespace  http://plug.dj/rsquash/
-// @version    1.02
+// @version    1.05
 // @description  Plug.dj Automation Tool
 // @copyright  2014, Kevin Navero
 // ==/UserScript==
@@ -305,6 +305,22 @@ window.setTimeout(function() {
             _$context.trigger("settings:show");
             $(".item.s-av").click();
             _$context.trigger("settings:hide");
+        }
+
+        else if (cmd[0] == "/notif") {
+            _$context.trigger("settings:show");
+            $(".item.s-dj").click();
+            $(".item.s-score").click();
+            $(".item.s-fan").click();
+            $(".item.s-tt").click();
+            _$context.trigger("settings:hide");
+        }
+
+        else if (cmd[0] == "/tall") {
+            command("/dance");
+            API.sendChat("/cap 1");
+            command("/av");
+            command("/notif");
         }
 
         else 
