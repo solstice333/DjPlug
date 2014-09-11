@@ -11,4 +11,9 @@ function chat_arrival(data) {
    }
 }
 
+function join_waitlist() {
+   API.djJoin();
+}
+
 API.on(API.CHAT, chat_arrival);
+API.on(API.ADVANCE, join_waitlist);
