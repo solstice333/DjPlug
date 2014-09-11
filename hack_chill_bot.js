@@ -18,7 +18,7 @@ var ready = function() {
       },
 
       main: function() {
-         console.log('inside hack_chill_bot.js');
+         console.log('hacking ChillBot now...');
          $.getScript('https://raw.githubusercontent.com/solstice333/DjPlug/hack_chill_bot/hack_chill_bot_core.js');
       }
    };
