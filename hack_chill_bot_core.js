@@ -9,7 +9,9 @@ responses = ["I'm liking this song", "Sup ChillBot", "This is pretty chill",
  "Really chill track", "Sweet track", "Sweet song", "Really sweet track", 
  "Really sweet song", "Pretty sweet track", "Pretty sweet song", 
  "Pretty cool track", "Pretty cool song", "Pretty good track", 
- "Pretty good song"];
+ "Pretty good song", "@ChillBot I'm here", "@ChillBot here", 
+ "@ChillBot I'm still here dammit", "@ChillBot, still here", 
+ "@ChillBot, I'm still here"];
 
 function chat_arrival(data) {
    if (data.un == "ChillBot") {
@@ -33,4 +35,4 @@ function join_waitlist() {
 
 API.on(API.CHAT, chat_arrival);
 API.on(API.ADVANCE, join_waitlist);
-chat_every_hour();
+// chat_every_hour();
