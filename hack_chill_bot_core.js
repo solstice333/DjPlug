@@ -34,5 +34,5 @@ function join_waitlist() {
 }
 
 API.on(API.CHAT, chat_arrival);
-API.on(API.ADVANCE, join_waitlist);
+// API.on(API.ADVANCE, join_waitlist);
 // chat_every_hour();
